@@ -104,6 +104,9 @@ function Home(props) {
                             <p className="center-align regular_text">
                                 {message}
                             </p>
+                            <p className="center-align heavy_text neon_text">
+                                Bet on Best Odds on the Fairlay App
+                            </p>
                         </div>
                     </div>
                 </div>
