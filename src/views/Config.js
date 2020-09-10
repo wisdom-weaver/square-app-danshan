@@ -22,6 +22,7 @@ function Config(props) {
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [singleSq, setSingleSq] =useState('');
+    const [isLocked, setIsLocked] =useState(false);
 
     const [message, setMessage] = useState('');
     const collection = useSelector(state=> state.firestore.ordered.squares);
@@ -34,6 +35,7 @@ function Config(props) {
         setDate(configCol[0].date ?? '');
         setTime(configCol[0].time ?? '');
         setMessage(configCol[0].message ?? '');
+        setIsLocked(configCol[0].isLocked ?? false);
     },[configCol])
     return (
         <div className="Config">
@@ -42,13 +44,21 @@ function Config(props) {
                     <div className="col s12 center">
                         <h5 className="center">Square-App || Config</h5>
                     </div>
-                    <div className="col s12 center">
+                    <div className="col s6 center">
                     <h5 className="center">reset All</h5>
                     <div 
                         onClick={()=>{
                             resetSquareCol();
                         }}
                         className="btn">Reset</div>
+                    </div>
+                    <div className="col s6 center">
+                    <h5 className="center"> status:{(isLocked)?("Locked"):("Not Locked")} </h5>
+                    <div 
+                        onClick={()=>{
+                            updateConfigFn({isLocked: !isLocked});
+                        }}
+                        className="btn">{(isLocked)?("Unlock"):("Lock")}</div>
                     </div>
                     <div className="col s12">
                         <hr/>
@@ -117,7 +127,7 @@ function Config(props) {
                         <div className="col s4 center">
                         <div 
                         onClick={()=>{
-                            console.log(singleSq);
+                            // console.log(singleSq);
                             resetSingleSq(singleSq);
                         }}
                         className="btn">OneSqReset</div>

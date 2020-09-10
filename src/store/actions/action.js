@@ -46,7 +46,9 @@ export const updateConfig = (update)=>{
     return (dispatch, getState, {getFirebase, getFirestore})=>{
         const firestore = getFirestore();
         firestore.collection('config').doc('configDoc').update(update)
-        .then(()=>{ console.log('uploaded') })
+        .then(()=>{ 
+            // console.log('uploaded') 
+        })
         .catch((err)=>{ console.log('err=>', err.message) })
     }
 }

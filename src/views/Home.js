@@ -32,12 +32,14 @@ function Home(props) {
 
     const [madeSelection, setMadeSelection] = useState(false);
     const [errModalStateOpen , setErrModalStateOpen] = useState(false);
+    const [errModalMessage , setErrModalMessage] = useState('');
     
     const [teamA, setTeamA] = useState('');
     const [teamB, setTeamB] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [message, setMessage] = useState('');
+    
     useEffect(()=>{
         validateValue();
     },[value])
@@ -117,9 +119,19 @@ function Home(props) {
                 <div className="grid-box">
                 {squares && squares.map((square,index)=>(
                     <div key={uuid()} className="box" onClick={()=>{ 
-                        if(madeSelection == false){ setSquareid(index); setModalStateOpen(true); }
-                        else{ setErrModalStateOpen(true); }
-                        
+                            if( configCol[0] && configCol[0].isLocked ){
+                                setErrModalStateOpen(true); 
+                                setErrModalMessage('Game has Stated. No more selections allowed');
+                            }else{
+                                if(madeSelection == false){ 
+                                    setSquareid(index);
+                                    setModalStateOpen(true); 
+                                }else{ 
+                                    setErrModalStateOpen(true); 
+                                    setErrModalMessage('You have already made a selection');
+                                }
+                            }
+
                         }} >
                         <div className={(square.val)?("box-content active"):("box-content")}>
                             <p className="index">{Math.floor(index/10)}-{index%10}</p>
@@ -195,7 +207,7 @@ function Home(props) {
                     }}
                   >
                       <p className="center flow-text red-text">
-                          You have already made a selection in this session 
+                          {errModalMessage}
                       </p>
                   </Modal>
             </div>
