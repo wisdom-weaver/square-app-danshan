@@ -21,6 +21,7 @@ function Config(props) {
     const [teamB, setTeamB] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
+    const [message, setMessage] = useState('');
     const collection = useSelector(state=> state.firestore.ordered.squares);
     const configCol = useSelector(state=> state.firestore.ordered.config);
     useEffect(()=>{
@@ -30,6 +31,7 @@ function Config(props) {
         setTeamB(configCol[0].teamB ?? '');
         setDate(configCol[0].date ?? '');
         setTime(configCol[0].time ?? '');
+        setMessage(configCol[0].message ?? '');
     },[configCol])
     return (
         <div className="Config">
@@ -77,10 +79,18 @@ function Config(props) {
                         value={time} 
                         />
                     </div>
+                    <div className="col s12">
+                        <TextInput 
+                        s={12}
+                        label='Message=>'
+                        onChange={(e)=>{setMessage(e.target.value)}}
+                        value={message} 
+                        />
+                    </div>
                     <div className="col s12 center">
                         <div 
                             onClick={()=>{
-                                updateConfigFn({teamA, teamB, date, time});
+                                updateConfigFn({teamA, teamB, date, time, message});
                             }}
                             className="btn">Save</div>
                         </div>

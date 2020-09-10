@@ -37,6 +37,7 @@ function Home(props) {
     const [teamB, setTeamB] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
+    const [message, setMessage] = useState('');
     useEffect(()=>{
         validateValue();
     },[value])
@@ -49,6 +50,7 @@ function Home(props) {
         setTeamB(configCol[0].teamB ?? '');
         setDate(configCol[0].date ?? '');
         setTime(configCol[0].time ?? '');
+        setMessage(configCol[0].message ?? '');
     },[configCol])
     const validateValue = ()=>{
         // console.log('isNaN(value)',isNaN(value));
@@ -98,6 +100,9 @@ function Home(props) {
                         <div className="col s12">
                             <p className="center-align regular_text">
                                 {date} -{time}
+                            </p>
+                            <p className="center-align regular_text">
+                                {message}
                             </p>
                         </div>
                     </div>
