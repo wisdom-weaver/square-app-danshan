@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { compose } from 'redux'
 import { connect, useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
-import { resetSquareCollection, updateConfig } from '../store/actions/action'
+import { resetSquareCollection, updateConfig, resetSingleSqAction } from '../store/actions/action'
 import 'materialize-css'
 import { TextInput } from 'react-materialize'
 
 function Config(props) {
-    const {resetSquareCol, updateConfigFn} = props
+    const {resetSquareCol, updateConfigFn, resetSingleSq} = props
     useFirestoreConnect({
         collection: 'squares',
         doc: 'data',
@@ -21,6 +21,8 @@ function Config(props) {
     const [teamB, setTeamB] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
+    const [singleSq, setSingleSq] =useState('');
+
     const [message, setMessage] = useState('');
     const collection = useSelector(state=> state.firestore.ordered.squares);
     const configCol = useSelector(state=> state.firestore.ordered.config);
@@ -95,6 +97,18 @@ function Config(props) {
                             className="btn">Save</div>
                         </div>
                     </div>
+                    <div className="col s12">
+                        <hr />
+                    </div>
+                    <div className="col s12">
+                        <h5 className="center">reset single</h5>
+                        <TextInput 
+                        s={12}
+                        label='square(Eg: 0-0)=>'
+                        onChange={(e)=>{setSingleSq(e.target.value)}}
+                        value={singleSq} 
+                        />
+                    </div>
                 </div>
             </div>
     )
@@ -107,7 +121,8 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>{
     return {
         resetSquareCol: ()=>{dispatch(resetSquareCollection())},
-        updateConfigFn: (update)=>{dispatch(updateConfig(update))}
+        updateConfigFn: (update)=>{dispatch(updateConfig(update))},
+        resetSingleSq: (singlesq)=>{dispatch(resetSingleSqAction(singleSq))}
     }
 }
 

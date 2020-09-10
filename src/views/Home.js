@@ -85,9 +85,11 @@ function Home(props) {
                     <img src="https://www.jgexchange.com/market/assets/img/fairlay-logo.png" />
                 </div>
                 <div className="teams-container">
-                    <div className="row">
+                    <div 
+                        style={{'marginBottom':'5px'}}
+                        className="row">
                         <div className="col s5">
-                            <h5 className="heavy_text neon-text right-align">{teamA}</h5>
+                            <h5 className="heavy_text white-text right-align">{teamA}</h5>
                         </div>
                         <div className="col s2">
                             <h5 className="center-align orange-text regular_text">
@@ -95,7 +97,7 @@ function Home(props) {
                             </h5>
                         </div>
                         <div className="col s5">
-                            <h5 className="heavy_text neon-text left-align">{teamB}</h5>
+                            <h5 className="heavy_text white-text left-align">{teamB}</h5>
                         </div>
                         <div className="col s12">
                             <p className="center-align regular_text">
@@ -104,8 +106,8 @@ function Home(props) {
                             <p className="center-align regular_text">
                                 {message}
                             </p>
-                            <p className="center-align heavy_text neon_text">
-                                Bet on Best Odds on the Fairlay App
+                            <p className="center-align heavy_text neon-text">
+                                <a className="neon-text" target="_blank" href="https://jgexchange.com/bet.html/"> Bet on this game at the best odds on the fairlay app </a>
                             </p>
                         </div>
                     </div>

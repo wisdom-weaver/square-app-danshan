@@ -25,6 +25,20 @@ export const resetSquareCollection = ()=>{
     }
 }
 
+export const resetSingleSqAction = (singleSq)=>{
+    return (dispatch, getState, {getFirebase, getFirestore})=>{
+        const firestore = getFirestore();
+        firestore.collection('squares').doc('data').get()
+        .then((doc)=>{
+            var squares = doc.data();
+            var indexAr = singleSq.trim().split('-');
+            var index = parseInt(indexAr[0]*10)+parseInt(index[0]);
+            console.log(index);
+            firestore.collection('squares').doc('data').set({squares})
+        });
+    }
+}
+
 export const updateConfig = (update)=>{
     return (dispatch, getState, {getFirebase, getFirestore})=>{
         const firestore = getFirestore();
