@@ -40,7 +40,7 @@ body {
   width: 100%;
   -ms-grid-columns: (minmax(30px, 1fr))[10];
       grid-template-columns: repeat(10, minmax(30px, 1fr));
-  grid-auto-rows: minmax(50px, 1fr);
+  grid-auto-rows: minmax(45px, 1fr);
 }
 
 .grid-box::before {
@@ -96,7 +96,7 @@ body {
 .image-container {
   width: 100%;
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 200px;
   text-align: center;
 }
 
@@ -137,5 +137,25 @@ body {
   color: #87C42B !important;
   font-weight: 500;
   opacity: 1;
+}
+
+.neon-text {
+  color: #87C42B !important;
+}
+
+.orange-text {
+  color: #FF9800 !important;
+}
+
+.light_text {
+  font-weight: 300;
+}
+
+.regular_text {
+  font-weight: 500;
+}
+
+.heavy_text {
+  font-weight: 700;
 }
 /*# sourceMappingURL=index.css.map */

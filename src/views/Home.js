@@ -32,7 +32,11 @@ function Home(props) {
 
     const [madeSelection, setMadeSelection] = useState(false);
     const [errModalStateOpen , setErrModalStateOpen] = useState(false);
-
+    
+    const [teamA, setTeamA] = useState('');
+    const [teamB, setTeamB] = useState('');
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
     useEffect(()=>{
         validateValue();
     },[value])
@@ -40,7 +44,11 @@ function Home(props) {
         if(!configCol || configCol.length == 0)return;
         if(localStorage.getItem('configuid') == configCol[0].uid) setMadeSelection(true);
         else  setMadeSelection(false);
-        // console.log('configCol',configCol[0].uid);
+        console.log('configCol',configCol);
+        setTeamA(configCol[0].teamA ?? '');
+        setTeamB(configCol[0].teamB ?? '');
+        setDate(configCol[0].date ?? '');
+        setTime(configCol[0].time ?? '');
     },[configCol])
     const validateValue = ()=>{
         // console.log('isNaN(value)',isNaN(value));
@@ -73,6 +81,26 @@ function Home(props) {
             <div className="flex-container">
                 <div className="image-container">
                     <img src="https://www.jgexchange.com/market/assets/img/fairlay-logo.png" />
+                </div>
+                <div className="teams-container">
+                    <div className="row">
+                        <div className="col s5">
+                            <h5 className="heavy_text neon-text right-align">{teamA}</h5>
+                        </div>
+                        <div className="col s2">
+                            <h5 className="center-align orange-text regular_text">
+                                VS
+                            </h5>
+                        </div>
+                        <div className="col s5">
+                            <h5 className="heavy_text neon-text left-align">{teamB}</h5>
+                        </div>
+                        <div className="col s12">
+                            <p className="center-align regular_text">
+                                {date} -{time}
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div className="grid-box">
                 {squares && squares.map((square,index)=>(

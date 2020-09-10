@@ -19,7 +19,7 @@ export const resetSquareCollection = ()=>{
         var squares = Array(tot).fill({val:null});
         firestore.collection('squares').doc('data').set({squares})
         .then(()=>{
-            firestore.collection('config').doc('configDoc').set({uid: uuid()})
+            firestore.collection('config').doc('configDoc').update({uid: uuid()})
         })
         .catch((err)=>{ console.log('err=>', err.message) })
     }
