@@ -106,6 +106,7 @@ function Home(props) {
                             </p>
                             <p className="center-align regular_text">
                                 {message}
+                                <br/>  You must tweet me your 4 digit number <a target="_blank" href="https://twitter.com/Spotonparts" className="neon-text">@spotonparts</a>
                             </p>
                             <p className="center-align heavy_text neon-text">
                                 <a className="neon-text" target="_blank" href="https://jgexchange.com/bet.html/"> Bet on this game at the best odds on the fairlay app </a>
