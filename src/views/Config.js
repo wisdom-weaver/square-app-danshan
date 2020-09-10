@@ -103,11 +103,19 @@ function Config(props) {
                     <div className="col s12">
                         <h5 className="center">reset single</h5>
                         <TextInput 
-                        s={12}
+                        s={8}
                         label='square(Eg: 0-0)=>'
                         onChange={(e)=>{setSingleSq(e.target.value)}}
                         value={singleSq} 
                         />
+                        <div className="col s4 center">
+                        <div 
+                        onClick={()=>{
+                            console.log(singleSq);
+                            resetSingleSq(singleSq);
+                        }}
+                        className="btn">OneSqReset</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,7 +130,7 @@ const mapDispatchToProps = (dispatch)=>{
     return {
         resetSquareCol: ()=>{dispatch(resetSquareCollection())},
         updateConfigFn: (update)=>{dispatch(updateConfig(update))},
-        resetSingleSq: (singlesq)=>{dispatch(resetSingleSqAction(singleSq))}
+        resetSingleSq: (singleSq)=>{dispatch(resetSingleSqAction(singleSq))}
     }
 }
 

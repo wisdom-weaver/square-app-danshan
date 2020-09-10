@@ -30,11 +30,14 @@ export const resetSingleSqAction = (singleSq)=>{
         const firestore = getFirestore();
         firestore.collection('squares').doc('data').get()
         .then((doc)=>{
-            var squares = doc.data();
+            var squares = doc.data().squares;
+            console.log(squares);
             var indexAr = singleSq.trim().split('-');
-            var index = parseInt(indexAr[0]*10)+parseInt(index[0]);
-            console.log(index);
-            firestore.collection('squares').doc('data').set({squares})
+            var index = parseInt(indexAr[0]*10)+parseInt(indexAr[1]);
+            var newSquares = new Array(...squares);
+            newSquares[index] = {val:null};
+            console.log(newSquares);
+            firestore.collection('squares').doc('data').update({squares: newSquares})
         });
     }
 }
