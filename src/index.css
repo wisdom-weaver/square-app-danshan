@@ -13,33 +13,68 @@ body {
   background-color: #EBF1F4;
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
+  background: #2C2C2C;
+  color: white;
+}
+
+.flex-container {
+  min-height: 100vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .grid-box {
+  margin: 0 auto;
+  max-width: 500px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[10];
-      grid-template-columns: repeat(10, 1fr);
-  grid-auto-rows: 60px;
+  width: 100%;
+  -ms-grid-columns: (minmax(30px, 1fr))[10];
+      grid-template-columns: repeat(10, minmax(30px, 1fr));
+  grid-auto-rows: minmax(50px, 1fr);
+}
+
+.grid-box::before {
+  padding-bottom: 100%;
 }
 
 .grid-box .box {
-  padding: 5px;
+  padding: 2px;
 }
 
 .grid-box .box .box-content {
+  width: 100%;
+  -webkit-transition: all 0.01s;
+  transition: all 0.01s;
   text-align: center;
-  border-radius: 10px;
-  background-color: rgba(54, 82, 109, 0.3);
-  color: #36526D;
+  border-radius: 2px;
+  background-color: rgba(135, 196, 43, 0.2);
+  color: #87C42B;
   cursor: pointer;
   height: 100%;
   width: 100%;
 }
 
+.grid-box .box .box-content:hover {
+  background-color: rgba(255, 152, 0, 0.5);
+}
+
 .grid-box .box .box-content.active {
-  background-color: #065446;
+  background-color: #87C42B;
   color: white;
+}
+
+.grid-box .box .box-content.active:hover {
+  background-color: #87C42B;
 }
 
 .grid-box .box .box-content .index {
@@ -51,6 +86,56 @@ body {
 
 .grid-box .box .box-content .val {
   font-size: 12px;
+  font-weight: 700;
+}
+
+.modal-content {
+  color: black;
+}
+
+.image-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 400px;
+  text-align: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.square-input input {
+  color: black !important;
+}
+
+.config-input input {
+  color: white !important;
+}
+
+.config-input input::-webkit-input-placeholder, label {
+  color: #87C42B !important;
   font-weight: 500;
+  opacity: 1;
+}
+
+.config-input input:-ms-input-placeholder, label {
+  color: #87C42B !important;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.config-input input::-ms-input-placeholder, label {
+  color: #87C42B !important;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.config-input input::placeholder, label {
+  color: #87C42B !important;
+  font-weight: 500;
+  opacity: 1;
 }
 /*# sourceMappingURL=index.css.map */

@@ -40,7 +40,7 @@ function Home(props) {
         if(!configCol || configCol.length == 0)return;
         if(localStorage.getItem('configuid') == configCol[0].uid) setMadeSelection(true);
         else  setMadeSelection(false);
-        console.log('configCol',configCol[0].uid);
+        // console.log('configCol',configCol[0].uid);
     },[configCol])
     const validateValue = ()=>{
         // console.log('isNaN(value)',isNaN(value));
@@ -48,7 +48,7 @@ function Home(props) {
         if(isNaN(value)) {setValueLog({data:'Enter 4 digits (nothing accept numbers is allowed)', type:'invalid'}); return false;}
         if(value.toString().length < 4 ) {setValueLog({data:'Enter 4 digits', type:'invalid'}); return false;}
         if((value).toString().length > 4) {setValueLog({data:'Maximum length of 4 is allowed', type:'invalid'}); return false;}
-        console.log(squares.map(square=> square.val).includes(value), squares.map(square=> square.val), value );
+        // console.log(squares.map(square=> square.val).includes(value), squares.map(square=> square.val), value );
         if(squares.map(square=> square.val).includes(parseInt(value))) {setValueLog({data:'this value has already been set', type:'invalid'}); return false;}
         setValueLog({data:'You can submit this', type:'valid'}); return true;
     }
@@ -70,20 +70,22 @@ function Home(props) {
     return (
         <div className="Home">
             <div className="container">
-                <h5 className="center">Square App</h5>
+            <div className="flex-container">
+                <div className="image-container">
+                    <img src="https://www.jgexchange.com/market/assets/img/fairlay-logo.png" />
+                </div>
                 <div className="grid-box">
                 {squares && squares.map((square,index)=>(
-                        <div key={uuid()} className="box" onClick={()=>{ 
-                            if(madeSelection == false){ setSquareid(index); setModalStateOpen(true); }
-                            else{ setErrModalStateOpen(true); }
-                            
-
-                            }} >
-                            <div className={(square.val)?("box-content active"):("box-content")}>
-                                <p className="index">{Math.floor(index/10)}-{index%10}</p>
-                                <p className="val">{square?.val ?? ''}</p>
-                            </div>
+                    <div key={uuid()} className="box" onClick={()=>{ 
+                        if(madeSelection == false){ setSquareid(index); setModalStateOpen(true); }
+                        else{ setErrModalStateOpen(true); }
+                        
+                        }} >
+                        <div className={(square.val)?("box-content active"):("box-content")}>
+                            <p className="index">{Math.floor(index/10)}-{index%10}</p>
+                            <p className="val">{square?.val ?? ''}</p>
                         </div>
+                    </div>
                 ))}
                 </div>
                 
@@ -96,7 +98,7 @@ function Home(props) {
                     ]}
                     bottomSheet={false}
                     fixedFooter={false}
-                    header={`Set Square:${squareid}`}
+                    header={`Set Square:${Math.floor(squareid/10)}-${squareid%10}`}
                     id={`Modal-sq`}
                     open={modalStateOpen}
                     options={{
@@ -122,7 +124,7 @@ function Home(props) {
                       ):(
                         <Fragment>
                             <TextInput 
-                            data-length={4}
+                            className= "square-input"
                             onChange={(e)=>{setValue(e.target.value)}}
                             value={value} />
                             <p className={(valueLog.type == 'invalid')?('red-text'):('green-text')}>{valueLog.data}</p>
@@ -156,6 +158,7 @@ function Home(props) {
                           You have already made a selection in this session 
                       </p>
                   </Modal>
+            </div>
             </div>
         </div>
     )

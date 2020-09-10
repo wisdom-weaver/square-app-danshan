@@ -3,9 +3,11 @@ import { v1 as uuid} from 'uuid';
 export const updateSquare = (update)=>{
     return (dispatch, getState, {getFirebase, getFirestore})=>{
         const firestore = getFirestore();
-        console.log(update);
+        // console.log(update);
         firestore.collection('squares').doc('data').update({squares: update.data})
-        .then(()=>{ console.log('updateSquare success') })
+        .then(()=>{ 
+            // console.log('updateSquare success') 
+        })
         .catch((err)=>{ console.log('err=>', err.message) })
     }
 }
@@ -22,3 +24,13 @@ export const resetSquareCollection = ()=>{
         .catch((err)=>{ console.log('err=>', err.message) })
     }
 }
+
+export const updateConfig = (update)=>{
+    return (dispatch, getState, {getFirebase, getFirestore})=>{
+        const firestore = getFirestore();
+        firestore.collection('config').doc('configDoc').update(update)
+        .then(()=>{ console.log('uploaded') })
+        .catch((err)=>{ console.log('err=>', err.message) })
+    }
+}
+
