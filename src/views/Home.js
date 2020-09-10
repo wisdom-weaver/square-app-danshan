@@ -45,7 +45,7 @@ function Home(props) {
         if(!configCol || configCol.length == 0)return;
         if(localStorage.getItem('configuid') == configCol[0].uid) setMadeSelection(true);
         else  setMadeSelection(false);
-        console.log('configCol',configCol);
+        // console.log('configCol',configCol);
         setTeamA(configCol[0].teamA ?? '');
         setTeamB(configCol[0].teamB ?? '');
         setDate(configCol[0].date ?? '');
@@ -63,10 +63,11 @@ function Home(props) {
         setValueLog({data:'You can submit this', type:'valid'}); return true;
     }
     const submitSquareValue = ()=>{
-        // console.log('submitSquare value',value, squareid);
+        console.log('submitSquare value',value, squareid);
         // console.log('validateValue', validateValue());
         if(! validateValue()) return;
-        if(! squareid) return;
+        if(squareid === '') return;
+        console.log('passed check');
         var data = new Array(...squares);
         // console.log(data,data[squareid]);
         data[squareid] = {val: parseInt(value)};

@@ -43,11 +43,18 @@ function Config(props) {
                         <h5 className="center">Square-App || Config</h5>
                     </div>
                     <div className="col s12 center">
+                    <h5 className="center">reset All</h5>
                     <div 
                         onClick={()=>{
                             resetSquareCol();
                         }}
                         className="btn">Reset</div>
+                    </div>
+                    <div className="col s12">
+                        <hr/>
+                    </div>
+                    <div className="col s12">
+                    <h5 className="center">Config</h5>
                     </div>
                     <div className="col s12 m6">
                         <TextInput 
@@ -96,7 +103,6 @@ function Config(props) {
                             }}
                             className="btn">Save</div>
                         </div>
-                    </div>
                     <div className="col s12">
                         <hr />
                     </div>
@@ -116,6 +122,7 @@ function Config(props) {
                         }}
                         className="btn">OneSqReset</div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

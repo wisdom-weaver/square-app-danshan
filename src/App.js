@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
           <Switch>
             <Route exact path="/"> <Home /> </Route>
-            <Route exact path="/config"> <Config /> </Route>
+            <Route exact path="/6266cce0ef33ccc8cdae-config"> <Config /> </Route>
           </Switch>
       </BrowserRouter>
     </div>
