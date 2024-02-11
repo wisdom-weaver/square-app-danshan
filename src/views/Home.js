@@ -131,9 +131,12 @@ function Home(props) {
                 </p>
                 <p className="center-align regular_text">
                   {message}
+                  {/*
                   <br /> You must tweet me your 4 digit number using the blue
                   tweet button{" "}
                   <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="I just entered the fairlay app $200 squares game FREE, you can enter too! " data-url="http://jgexchange.com/squares/" data-via="Spotonparts" data-related="" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                  */}
                 </p>
                 <p className="center-align heavy_text neon-text">
                   <a
@@ -159,7 +162,7 @@ function Home(props) {
                     if (configCol[0] && configCol[0].isLocked) {
                       setErrModalStateOpen(true);
                       setErrModalMessage(
-                        "Game has Stated. No more selections allowed"
+                        "Game has Stated. No more selections allowed",
                       );
                     } else {
                       if (madeSelection == false) {
