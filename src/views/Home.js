@@ -8,6 +8,9 @@ import { setLogLevel } from "firebase";
 import { updateSquare } from "../store/actions/action";
 import { v1 as uuid } from "uuid";
 
+const logo =
+  "https://dna-run-public.s3.us-east-2.amazonaws.com/imgs/dna_logo.png";
+
 function Home(props) {
   const { updateSquare } = props;
   useFirestoreConnect([
@@ -33,11 +36,12 @@ function Home(props) {
   const [squareid, setSquareid] = useState();
   const [modalStateOpen, setModalStateOpen] = useState(false);
   const [valueLog, setValueLog] = useState({
-    data: "Enter 4 digits",
+    data: "Enter 5 digits",
     type: "valid",
   });
 
-  const [madeSelection, setMadeSelection] = useState(false);
+  const mx_sels = 3;
+  const [madeSelection, setMadeSelection] = useState(0);
   const [errModalStateOpen, setErrModalStateOpen] = useState(false);
   const [errModalMessage, setErrModalMessage] = useState("");
 
@@ -52,9 +56,9 @@ function Home(props) {
   }, [value]);
   useEffect(() => {
     if (!configCol || configCol.length == 0) return;
-    if (localStorage.getItem("configuid") == configCol[0].uid)
-      setMadeSelection(true);
-    else setMadeSelection(false);
+    if (localStorage.getItem("made_selections"))
+      setMadeSelection(parseInt(localStorage.getItem("made_selections")));
+    else setMadeSelection(0);
     // console.log('configCol',configCol);
     setTeamA(configCol[0].teamA ?? "");
     setTeamB(configCol[0].teamB ?? "");
@@ -65,22 +69,22 @@ function Home(props) {
   const validateValue = () => {
     // console.log('isNaN(value)',isNaN(value));
     if (value == "") {
-      setValueLog({ data: "Enter 4 digits", type: "invalid" });
+      setValueLog({ data: "Enter up to 5 digits", type: "invalid" });
       return false;
     }
     if (isNaN(value)) {
       setValueLog({
-        data: "Enter 4 digits (nothing accept numbers is allowed)",
+        data: "Enter digits (nothing except numbers is allowed)",
         type: "invalid",
       });
       return false;
     }
-    if (value.toString().length < 4) {
-      setValueLog({ data: "Enter 4 digits", type: "invalid" });
+    if (value.toString().length <= 0) {
+      setValueLog({ data: "Enter up to 5 digits", type: "invalid" });
       return false;
     }
-    if (value.toString().length > 4) {
-      setValueLog({ data: "Maximum length of 4 is allowed", type: "invalid" });
+    if (value.toString().length > 5) {
+      setValueLog({ data: "Maximum length of 5 is allowed", type: "invalid" });
       return false;
     }
     // console.log(squares.map(square=> square.val).includes(value), squares.map(square=> square.val), value );
@@ -103,8 +107,9 @@ function Home(props) {
     updateSquare({
       data: data,
     });
-    localStorage.setItem("configuid", configCol[0].uid);
-    setMadeSelection(true);
+    let n2 = madeSelection + 1;
+    localStorage.setItem("made_selections", n2);
+    setMadeSelection(n2);
   };
 
   return (
@@ -112,7 +117,7 @@ function Home(props) {
       <div className="container">
         <div className="flex-container">
           <div className="image-container">
-            <img src="https://www.jgexchange.com/market/assets/img/fairlay-logo.png" />
+            <img src={logo} />
           </div>
           <div className="teams-container">
             <div style={{ marginBottom: "5px" }} className="row">
@@ -131,23 +136,27 @@ function Home(props) {
                 </p>
                 <p className="center-align regular_text">
                   {message}
-                  {/*
-                  <br /> You must tweet me your 4 digit number using the blue
-                  tweet button{" "}
-                  <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="I just entered the fairlay app $200 squares game FREE, you can enter too! " data-url="http://jgexchange.com/squares/" data-via="Spotonparts" data-related="" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-                  */}
-                </p>
-                <p className="center-align heavy_text neon-text">
+                  <br />
+                  You
+                  <span className="neon-text">{" MUST "}</span>
+                  tweet using the black X post button
                   <a
-                    className="neon-text"
-                    target="_blank"
-                    href="https://jgexchange.com/bet.html/"
+                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                    class="twitter-share-button"
+                    data-text="I just entered the @dnaracing FREE squares contest"
+                    data-url="https://www.dnaracing.run/"
+                    data-via="spotonparts"
+                    data-hashtags="dnaracing"
+                    data-lang="en"
+                    data-show-count="false"
                   >
-                    {" "}
-                    Bet on this game at the best odds on the fairlay app click
-                    here to see our great lines{" "}
+                    Tweet
                   </a>
+                  <script
+                    async
+                    src="https://platform.twitter.com/widgets.js"
+                    charset="utf-8"
+                  ></script>
                 </p>
               </div>
             </div>
@@ -165,12 +174,14 @@ function Home(props) {
                         "Game has Stated. No more selections allowed",
                       );
                     } else {
-                      if (madeSelection == false) {
+                      if (madeSelection >= mx_sels) {
+                        setErrModalStateOpen(true);
+                        setErrModalMessage(
+                          `You have already made ${mx_sels} selection`,
+                        );
+                      } else {
                         setSquareid(index);
                         setModalStateOpen(true);
-                      } else {
-                        setErrModalStateOpen(true);
-                        setErrModalMessage("You have already made a selection");
                       }
                     }
                   }}
