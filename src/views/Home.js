@@ -8,8 +8,7 @@ import { setLogLevel } from "firebase";
 import { updateSquare } from "../store/actions/action";
 import { v1 as uuid } from "uuid";
 
-const logo =
-  "https://dna-run-public.s3.us-east-2.amazonaws.com/imgs/dna_logo.png";
+const logo = "https://cdn.dnaracing.run/imgs/dna_logo.png";
 
 function Home(props) {
   const { updateSquare } = props;
