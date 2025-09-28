@@ -3,15 +3,14 @@ const http = require('http');
 const options = {
   hostname: 'localhost',
   port: 3050,
-  path: '/health',
+  path: '/',
   method: 'GET',
   timeout: 5000
 };
 
 const req = http.request(options, (res) => {
-  if (res.statusCode === 200 || res.statusCode === 404) {
-    // 404 is also OK for React apps that serve everything through index.html
-    // We just need the server to be responsive
+  if (res.statusCode === 200) {
+    // React dev server should return 200 for the root path
     process.exit(0);
   } else {
     process.exit(1);
