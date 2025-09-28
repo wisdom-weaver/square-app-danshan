@@ -2,7 +2,7 @@ services:
   square-app:
     build: .
     ports:
-      - "3000:3000"
+      - "3050:3050"
     volumes:
       - .:/app
       - /app/node_modules
@@ -23,7 +23,7 @@ services:
       - "traefik.http.routers.square-app.rule=Host(`squares.dnaracing.run`)"
       - "traefik.http.routers.square-app.entrypoints=websecure"
       - "traefik.http.routers.square-app.tls.certresolver=letsencrypt"
-      - "traefik.http.services.square-app.loadbalancer.server.port=3000"
+      - "traefik.http.services.square-app.loadbalancer.server.port=3050"
       - "traefik.http.services.square-app.loadbalancer.healthcheck.path=/health"
       - "traefik.http.services.square-app.loadbalancer.healthcheck.interval=30s"
       # Rate limiting
