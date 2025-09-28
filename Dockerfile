@@ -13,8 +13,11 @@ RUN npm install --legacy-peer-deps
 # Copy source code
 COPY . .
 
-# Expose port 3000 (React default)
-EXPOSE 3000
+# Expose port 3050
+EXPOSE 3050
+
+# Set port for React development server
+ENV PORT=3050
 
 # Start the application
 CMD ["npm", "start"]
